@@ -122,10 +122,31 @@ const features = [
 
 const pricingPlans = [
   {
+    name: 'Test Drive',
+    monthlyPrice: null,
+    customPrice: 'Free',
+    annotatedPrice: 'forever',
+    description: 'Free downloadble version. Limited knowledge packs. 1 month conversation history.',
+    features: ['All knowledge offline', 'Unlimited image generation', 'Local encryption', 'Open‑source source code', '', ''],
+    cta: { label: 'Try Now', href: '/purchase' },
+  },
+  {
     name: 'Sovereign License',
     monthlyPrice: null,
+    customPrice: '$300',
+    annotatedPrice: 'one-time',
     description: 'One‑time purchase. Own Flowster forever. No subscription, no renewal.',
-    features: ['All knowledge offline', 'Local encryption', 'Auto‑updates via local channel', 'Open‑source source code'],
+    features: ['All knowledge offline', 'Unlimited image generation', 'Local encryption', 'Open‑source source code', 'Updates via local channel', 'Unlimited chat history'],
+    highlighted: true,
+    cta: { label: 'Buy Now', href: '/purchase' },
+  },
+  {
+    name: 'Sovereign License /mo',
+    monthlyPrice: null,
+    customPrice: '$30',
+    annotatedPrice: '12 months',
+    description: '12 payment purchase. Own Flowster forever. No subscription, no renewal.',
+    features: ['All knowledge offline', 'Unlimited image generation', 'Local encryption', 'Open‑source source code', 'Updates via local channel', 'Unlimited chat history'],
     cta: { label: 'Buy Now', href: '/purchase' },
   },
 ];
@@ -136,8 +157,8 @@ const pricingPlans = [
   description={siteConfig.description}
 >
   <Hero
-    title="Your Sovereign AI – 100 % Offline, 100 % Yours"
-    subtitle="Own every question, answer, and conversation on your own hardware. No internet, no cloud, no third‑party data collectors."
+    title="All humanity’s knowledge, $300 one-time fee"
+    subtitle="100% offline. Own every question, answer, and conversation on your own hardware. No internet, no cloud, no third‑party data collectors."
     primaryCTA={{ label: 'Purchase Flowster', href: '/purchase' }}
     secondaryCTA={{ label: 'Learn More', href: '/docs' }}
   />
@@ -203,7 +224,7 @@ const pricingPlans = [
   />
 
   <BentoGrid
-    title="Developer‑First Offline AI"
+    title="Made for patriots"
     subtitle="Built by the open‑source community, for anyone who values freedom."
     items={bentoItems}
     background="muted"
@@ -211,7 +232,7 @@ const pricingPlans = [
 
   <PricingTable
     title="Simple, transparent pricing"
-    subtitle="Own Flowster forever – one‑time payment, no recurring costs."
+    subtitle="Join the fight – own Flowster forever with a one‑time payment, no recurring costs."
     plans={pricingPlans}
     annualDiscount={null}
     background="default"
@@ -238,7 +259,7 @@ const pricingPlans = [
   }
 
   <CTA
-    title="Ready to own your knowledge?"
+    title="Ready to stand against big tech?"
     description="Purchase Flowster today and bring the entire humanities knowledge base into your own hands."
     action={{ label: 'Buy Now', href: '/purchase' }}
   />

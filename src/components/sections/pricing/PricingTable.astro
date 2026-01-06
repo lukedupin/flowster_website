@@ -36,6 +36,7 @@ interface PricingPlan {
   monthlyPrice: number | null;
   /** Custom price text for enterprise plans (e.g., "Custom", "Contact us") */
   customPrice?: string;
+  annotatedPrice?: string;
   /** Short description of the plan */
   description: string;
   /** List of features included in the plan */
@@ -107,54 +108,8 @@ function formatPrice(price: number): string {
       )
     }
 
-    <!-- Billing Toggle -->
-    <div class="flex justify-center mb-12">
-      <div class="inline-flex items-center gap-3 p-1.5 bg-surface border border-border rounded-lg">
-        <button
-          type="button"
-          data-period="monthly"
-          class:list={[
-            'pricing-toggle-btn cursor-pointer px-4 py-2 text-sm font-medium rounded-md transition-all',
-            defaultPeriod === 'monthly'
-              ? 'bg-primary text-white shadow-sm'
-              : 'text-text-muted hover:text-text',
-          ]}
-          aria-pressed={defaultPeriod === 'monthly'}
-        >
-          Monthly
-        </button>
-        <button
-          type="button"
-          data-period="annual"
-          class:list={[
-            'pricing-toggle-btn cursor-pointer px-4 py-2 text-sm font-medium rounded-md transition-all flex items-center gap-2',
-            defaultPeriod === 'annual'
-              ? 'bg-primary text-white shadow-sm'
-              : 'text-text-muted hover:text-text',
-          ]}
-          aria-pressed={defaultPeriod === 'annual'}
-        >
-          Annual
-          {
-            annualDiscount > 0 && (
-              <span
-                class:list={[
-                  'text-xs px-1.5 py-0.5 rounded-full font-semibold',
-                  defaultPeriod === 'annual'
-                    ? 'bg-white/20 text-white'
-                    : 'bg-primary/10 text-primary',
-                ]}
-              >
-                -{annualDiscount}%
-              </span>
-            )
-          }
-        </button>
-      </div>
-    </div>
-
     <!-- Pricing Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="pricing-cards">
+    <div class="w-full inline-flex justify-center gap-8" id="pricing-cards">
       {
         plans.map((plan) => {
           const hasNumericPrice = plan.monthlyPrice !== null;
@@ -165,7 +120,7 @@ function formatPrice(price: number): string {
           return (
             <div
               class:list={[
-                'pricing-card relative p-8 rounded-lg border transition-all',
+                'pricing-card relative p-8 w-96 rounded-lg border transition-all',
                 plan.highlighted
                   ? 'bg-primary/5 border-primary shadow-lg scale-[1.02]'
                   : 'bg-surface border-border hover:border-primary/50 hover:shadow-md',
@@ -187,60 +142,28 @@ function formatPrice(price: number): string {
                 <p class="mt-2 text-text-muted text-sm">{plan.description}</p>
 
                 <div class="mt-6 min-h-18 flex flex-col justify-center">
-                  {hasNumericPrice ? (
-                    <>
-                      {/* Monthly Price Display */}
-                      <div
-                        class:list={['price-display', defaultPeriod === 'monthly' ? '' : 'hidden']}
-                        data-period="monthly"
-                      >
-                        <span class="text-4xl font-bold text-text">
-                          {formatPrice(monthlyPrice)}
-                        </span>
-                        <span class="text-text-muted">/month</span>
-                      </div>
-
-                      {/* Annual Price Display */}
-                      <div
-                        class:list={['price-display', defaultPeriod === 'annual' ? '' : 'hidden']}
-                        data-period="annual"
-                      >
-                        <span class="text-4xl font-bold text-text">{formatPrice(annualPrice)}</span>
-                        <span class="text-text-muted">/month</span>
-                        {monthlyPrice > 0 && (
-                          <div class="mt-1">
-                            <span class="text-xs text-text-muted line-through mr-2">
-                              {formatPrice(monthlyPrice)}/mo
-                            </span>
-                            <span class="text-xs text-primary font-medium">
-                              Save {formatPrice((monthlyPrice - annualPrice) * 12)}
-                              /year
-                            </span>
-                          </div>
-                        )}
-                      </div>
-                    </>
-                  ) : (
                     <div class="price-display">
                       <span class="text-4xl font-bold text-text">
-                        {plan.customPrice || 'Custom'}
+                        {plan.customPrice || 'Free'}
                       </span>
-                      <span class="text-text-muted">/month</span>
+                      <span class="text-text-muted">/{plan.annotatedPrice}</span>
                     </div>
-                  )}
                 </div>
               </div>
 
               <ul class="mt-8 space-y-4">
                 {plan.features.map((feature) => (
                   <li class="flex items-start gap-3">
-                    <Icon name="lucide:check" class="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                    {feature ?
+                      <Icon name="lucide:check" class="w-5 h-5 text-primary shrink-0 mt-0.5" /> :
+                      <div class="w-5 h-5 shrink-0 mt-0.5" />
+                    }
                     <span class="text-text-muted">{feature}</span>
                   </li>
                 ))}
               </ul>
 
-              <div class="mt-8">
+              <div class="mt-10">
                 <a
                   href={plan.cta.href}
                   class:list={[

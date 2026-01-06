@@ -13,7 +13,7 @@ export const name = import.meta.env.SITE_NAME || 'Flowster';
 
 /** Site description for SEO and meta tags */
 export const description =
-  import.meta.env.SITE_DESCRIPTION || 'The modern platform for building and shipping faster';
+  import.meta.env.SITE_DESCRIPTION || 'Sovereign offline AI';
 
 /** Production URL of your site (used for sitemap, RSS, canonical URLs) */
 export const url = import.meta.env.SITE_URL || 'http://localhost:4321';
@@ -38,5 +38,5 @@ export const social: SocialLinks = {
 export const legal: LegalConfig = {
   privacyEmail: 'privacy@virex.example.com',
   legalEmail: 'legal@virex.example.com',
-  lastUpdated: 'December 17, 2024',
+  lastUpdated: 'January 6, 2026',
 };

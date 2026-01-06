@@ -1,5 +1,5 @@
 ---
-quote: "Virex cut our deployment time from 20 minutes to under 30 seconds. Our team ships multiple times a day now instead of dreading weekly releases. Thank you so much, Virex!"
+quote: "I use flowster to capture all my ideas and tasks throughout the day. Its intuitive interface and powerful features help me stay organized and productive."
 author: "Alex Rivera"
 role: "CTO"
 company: "Stackwise"
